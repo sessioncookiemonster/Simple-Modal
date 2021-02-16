@@ -1,3 +1,17 @@
+//forEach polyfill
+if (!Array.prototype.forEach) {
+    Array.prototype.forEach = function forEach (callback, thisArg) {
+        if (typeof callback !== 'function') {
+            throw new TypeError(callback + ' is not a function');
+        }
+        var array = this;
+        thisArg = thisArg || this;
+        for (var i = 0, l = array.length; i !== l; ++i) {
+            callback.call(thisArg, array[i], i, array);
+        }
+    };
+}
+
 var Modal = function(id,forceOpen,clickable_overlay){
     if (forceOpen === undefined) forceOpen = false;
     if (clickable_overlay === undefined) clickable_overlay = false;
@@ -34,7 +48,11 @@ Modal.prototype ={
         contentWrapper.style.cssText += extraCss;
         modal.appendChild(contentWrapper);
         if(content){
-            contentWrapper.appendChild(content);
+            if(typeof(content) === 'string')
+                contentWrapper.appendChild(document.createTextNode(content));
+
+            if(typeof(content)==='object')
+                contentWrapper.appendChild(content);
         }
         this.element = contentWrapper;
         this.mainElement = modal;

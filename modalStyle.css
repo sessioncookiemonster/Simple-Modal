@@ -1,0 +1,40 @@
+#modalOverlay{
+    display:none;
+}
+
+.modal-active #modalOverlay{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    background-color: rgba(28, 28, 28, 0.5);
+    float: left;
+    top: 0;
+    z-index: 999999;
+    display:block;
+}
+
+.modal-active #modalOverlay .modalContent{
+    min-width: 25vw;
+    min-height: 10vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: transparent;
+}
+
+.modal-active #modalOverlay .modalContent .closebutton{
+    position: relative;
+    float: right;
+    right: -5%;
+    top: 0vh;
+    cursor: pointer;
+    color: #ffce00;
+    border: 1px solid #ffce00;
+    padding: 3px;
+    background-color: black;
+}
+
+.modal-active #modalOverlay .modalContent .closebutton:hover{
+    background-color: #ffce00;
+}
