@@ -20,7 +20,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    background-color: transparent;
+    color: #000;
+    background: rgba(0,0,0,0.5);
 }
 
 .modal-active #modalOverlay .modalContent .closebutton{
@@ -30,11 +31,10 @@
     top: 0vh;
     cursor: pointer;
     color: #ffce00;
-    border: 1px solid #ffce00;
-    padding: 3px;
+    padding: 1px;
     background-color: black;
 }
 
 .modal-active #modalOverlay .modalContent .closebutton:hover{
-    background-color: #ffce00;
+    background-color: gray;
 }
