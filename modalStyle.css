@@ -22,19 +22,34 @@
     transform: translate(-50%,-50%);
     color: #000;
     background: rgba(0,0,0,0.5);
+    overflow:auto;
+    max-height: 95vh;
+    max-width: 95vw;
+}
+
+.modal-active #modalOverlay .modalContent>div.insideModal:first-child{
+    width:100%;
+    height: 100%;
 }
 
 .modal-active #modalOverlay .modalContent .closebutton{
-    position: relative;
+    position: sticky;
     float: right;
-    right: -5%;
+    right: 0%;
     top: 0vh;
     cursor: pointer;
     color: #ffce00;
     padding: 1px;
     background-color: black;
+    z-index: 9999;
 }
 
 .modal-active #modalOverlay .modalContent .closebutton:hover{
     background-color: gray;
+}
+
+@media only screen and (max-width: 600px){
+    .modal-active #modalOverlay .modalContent{
+        min-width: 98vw;
+    }
 }
