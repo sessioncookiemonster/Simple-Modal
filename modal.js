@@ -136,6 +136,7 @@ Modal.prototype ={
         else{
             document.querySelector("html").style.overflow = "hidden";
             document.querySelector("html").style.position = "fixed";
+            document.querySelector("html").style.width = "100%";
         }
     }
 
