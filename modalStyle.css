@@ -42,10 +42,13 @@
     padding: 1px;
     background-color: black;
     z-index: 9999;
+    width:3%;
+    fill: #fff;
 }
 
 .modal-active #modalOverlay .modalContent .closebutton:hover{
     background-color: gray;
+    fill:black;
 }
 
 @media only screen and (max-width: 600px){

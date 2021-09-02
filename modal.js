@@ -36,8 +36,12 @@ Modal.prototype ={
         contentWrapper.classList.add('modalContent');
         contentWrapper.classList.add(this.id);
         if (!this.forceOpen) {
-            var closingX = document.createElement('img');
-            closingX.setAttribute('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAbCAYAAACN1PRVAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQyIDc5LjE2MDkyNCwgMjAxNy8wNy8xMy0wMTowNjozOSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTggKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkM0QkYxODJCQUI2NDExRTg5NzFDOTJFNkE4RDcwMkNDIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkM0QkYxODJDQUI2NDExRTg5NzFDOTJFNkE4RDcwMkNDIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6QzRCRjE4MjlBQjY0MTFFODk3MUM5MkU2QThENzAyQ0MiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6QzRCRjE4MkFBQjY0MTFFODk3MUM5MkU2QThENzAyQ0MiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7FKelYAAAA70lEQVR42rzWOw6DMAwGYMLC1gvAKZB6qUyMuRMX6GE69gCoYxc3aU0bhTzsOMLSPxCQPwWEFQUA3VnVB9eDzdKo94L9/uV2hhlsNviW8dZrYrDPhn0/6zEIhKAJ+vzA/YHR5g7HMkIIsO/oYy6TEExBU/gapWARimE1IAlKYRyQDOUwCsiCSlgOvHEhCpYDWRAVK4EkyKUnzrmHzZq4t+L9cgl+WPaPXwu9asDaEXStmTSSEcQebZ1wBLFA0azjglKIBbaAyOD+4CyESuAc7kwLoRSoU99MC6EQ1P66ihxSLzbPBufGQx915on4LcAAim/OXHCq4hcAAAAASUVORK5CYII=');
+            var closingX =  document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            closingX.setAttribute('viewBox','0 0 460.775 460.775');
+            var innerPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            innerPath.setAttribute('d',"M285.08 230.397L456.218 59.27c6.076-6.077 6.076-15.911 0-21.986L423.511 4.565a15.55 15.55 0 00-21.985 0l-171.138 171.14L59.25 4.565a15.551 15.551 0 00-21.985 0L4.558 37.284c-6.077 6.075-6.077 15.909 0 21.986l171.138 171.128L4.575 401.505c-6.074 6.077-6.074 15.911 0 21.986l32.709 32.719a15.555 15.555 0 0021.986 0l171.117-171.12 171.118 171.12a15.551 15.551 0 0021.985 0l32.709-32.719c6.074-6.075 6.074-15.909 0-21.986L285.08 230.397z");
+            closingX.setAttribute('alt','X');
+            closingX.appendChild(innerPath);
             closingX.setAttribute('alt','X');
             closingX.classList.add('closebutton');
             closingX.addEventListener('click',closebyx = function(){_this.closeModal()});
