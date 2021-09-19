@@ -2,7 +2,7 @@
     display:none;
 }
 
-.modal-active #modalOverlay{
+.modal-active#modalOverlay{
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -13,7 +13,7 @@
     display:block;
 }
 
-.modal-active #modalOverlay .modalContent{
+.modal-active#modalOverlay .modalContent{
     min-width: 25vw;
     min-height: 10vh;
     position: absolute;
@@ -21,18 +21,18 @@
     left: 50%;
     transform: translate(-50%,-50%);
     color: #000;
-    background: rgba(0,0,0,0.5);
+    background: rgba(255,255,255,1);
     overflow:auto;
     max-height: 95vh;
     max-width: 95vw;
 }
 
-.modal-active #modalOverlay .modalContent>div.insideModal:first-child{
+.modal-active#modalOverlay .modalContent>div.insideModal:first-child{
     width:100%;
     height: 100%;
 }
 
-.modal-active #modalOverlay .modalContent .closebutton{
+.modal-active#modalOverlay .modalContent .closebutton{
     position: sticky;
     float: right;
     right: 0%;
@@ -46,13 +46,13 @@
     fill: #fff;
 }
 
-.modal-active #modalOverlay .modalContent .closebutton:hover{
+.modal-active#modalOverlay .modalContent .closebutton:hover{
     background-color: gray;
     fill:black;
 }
 
 @media only screen and (max-width: 600px){
-    .modal-active #modalOverlay .modalContent{
+    .modal-active#modalOverlay .modalContent{
         min-width: 98vw;
     }
 }

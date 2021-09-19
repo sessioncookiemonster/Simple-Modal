@@ -27,15 +27,14 @@ Modal.prototype ={
     createModal: function(content,extraCss){
         if(extraCss === undefined) extraCss = '';
         //Overlay element css #modalOverlay
-        //Body to recieve .modal-active when active. Content inside .modalContent
+        //Main modal element to recieve .modal-active when active. Content inside .modalContent
         var _this = this;
         var modal = document.createElement('div');
         modal.setAttribute('id','modalOverlay');
-       // modal.style.cssText += extraCss;
         var contentWrapper= document.createElement('div');
         contentWrapper.classList.add('modalContent');
         contentWrapper.classList.add(this.id);
-        if (!this.forceOpen) {
+        if (!this.forceOpen) {      //Create closing X
             var closingX =  document.createElementNS("http://www.w3.org/2000/svg", "svg");
             closingX.setAttribute('viewBox','0 0 460.775 460.775');
             var innerPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -45,8 +44,6 @@ Modal.prototype ={
             closingX.classList.add('closebutton');
             closingX.addEventListener('click',closebyx = function(){_this.closeModal()});
             contentWrapper.appendChild(closingX);
-        } else {
-            //Do nothing
         }
         contentWrapper.style.cssText += extraCss;
         modal.appendChild(contentWrapper);
@@ -76,7 +73,7 @@ Modal.prototype ={
         var _this = this;
         _this.toggleTabs();
         _this.toggleScrollLock();
-        document.body.classList.add('modal-active');
+        this.mainElement.classList.add('modal-active');
         this.isOpen = true;
         if (!this.forceOpen) {
             if(!this.clickable_overlay){
@@ -95,7 +92,7 @@ Modal.prototype ={
     closeModal : function(){
         this.toggleTabs();
         this.toggleScrollLock();
-        document.body.classList.remove('modal-active');
+        this.mainElement.classList.remove('modal-active');
         if(!this.clickable_overlay) {
             this.mainElement.removeEventListener('click', closethat);
         }
