@@ -33,7 +33,8 @@
 }
 
 .modal-active#modalOverlay .modalContent .closebutton{
-    position: sticky;
+	position: absolute;
+    /*position: sticky;*/
     float: right;
     right: 0%;
     top: 0vh;
