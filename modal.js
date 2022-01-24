@@ -12,7 +12,7 @@ if (!Array.prototype.forEach) {
     };
 }
 
-var Modal = function(id,forceOpen,clickable_overlay){
+var TinyModal = function(id,forceOpen,clickable_overlay){
     if (forceOpen === undefined) forceOpen = false;
     if (clickable_overlay === undefined) clickable_overlay = false;
     this.id = id;
@@ -21,9 +21,10 @@ var Modal = function(id,forceOpen,clickable_overlay){
     this.isOpen = false;
     this.forceOpen = forceOpen;
     this.clickable_overlay = clickable_overlay;
+    this.callbacks ={};
 };
 
-Modal.prototype ={
+TinyModal.prototype ={
     createModal: function(content,extraCss){
         if(extraCss === undefined) extraCss = '';
         //Overlay element css #modalOverlay
@@ -77,10 +78,10 @@ Modal.prototype ={
         this.isOpen = true;
         if (!this.forceOpen) {
             if(!this.clickable_overlay){
-                this.mainElement.addEventListener('click',closethat = function(){_this.closeModal()},false);
+                this.mainElement.addEventListener('click',_this.callbacks.closeModal = _this.closeModal.bind(_this));
             }
-            this.element.addEventListener('click',stopProp = function(e){e.stopPropagation()});
-            document.addEventListener("keydown",closeme = function(e){
+            this.element.addEventListener('click',_this.callbacks.stopProp = function(e){e.stopPropagation()});
+            document.addEventListener("keydown",_this.callbacks.closeme = function(e){
                 if(e.which==27 && _this.isOpen){
                     _this.closeModal();
                 }
@@ -94,10 +95,10 @@ Modal.prototype ={
         this.toggleScrollLock();
         this.mainElement.classList.remove('modal-active');
         if(!this.clickable_overlay) {
-            this.mainElement.removeEventListener('click', closethat);
+            this.mainElement.removeEventListener('click', this.callbacks.closeModal);
         }
-        this.element.removeEventListener('click',stopProp);
-        document.removeEventListener("keydown",closeme);
+        this.element.removeEventListener('click',this.callbacks.stopProp);
+        document.removeEventListener("keydown",this.callbacks.closeme);
         this.isOpen = false;
     },
     tabsInModal: function(){
