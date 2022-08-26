@@ -1,5 +1,4 @@
-//forEach polyfill
-if (!Array.prototype.forEach) {
+if (!Array.prototype.forEach) {     //forEach polyfill
     Array.prototype.forEach = function forEach (callback, thisArg) {
         if (typeof callback !== 'function') {
             throw new TypeError(callback + ' is not a function');
@@ -11,8 +10,12 @@ if (!Array.prototype.forEach) {
         }
     };
 }
+if (!('remove' in Element.prototype)) {     // remove polyfill
+    Element.prototype.remove = function() {if (this.parentNode) this.parentNode.removeChild(this);};
+}
 
 var TinyModal = function(id,forceOpen,clickable_overlay){
+    if (id === undefined) id = '';
     if (forceOpen === undefined) forceOpen = false;
     if (clickable_overlay === undefined) clickable_overlay = false;
     this.id = id;
@@ -25,33 +28,22 @@ var TinyModal = function(id,forceOpen,clickable_overlay){
 };
 
 TinyModal.prototype ={
-    createModal: function(content,extraCss){
+    createModal: function(content,extraCss){        //Main modal element to receive .modal-active when active. | Content goes inside .modalContent
+        if(this.mainElement!==null) this.removeModal();
         if(extraCss === undefined) extraCss = '';
-        //Overlay element css #modalOverlay
-        //Main modal element to recieve .modal-active when active. Content inside .modalContent
-        var _this = this;
         var modal = document.createElement('div');
-        modal.setAttribute('id','modalOverlay');
+        modal.classList.add('tiny-modal-overlay')
         var contentWrapper= document.createElement('div');
         contentWrapper.classList.add('modalContent');
         contentWrapper.classList.add(this.id);
-        if (!this.forceOpen) {      //Create closing X
-            var closingX =  document.createElementNS("http://www.w3.org/2000/svg", "svg");
-            closingX.setAttribute('viewBox','0 0 460.775 460.775');
-            var innerPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
-            innerPath.setAttribute('d',"M285.08 230.397L456.218 59.27c6.076-6.077 6.076-15.911 0-21.986L423.511 4.565a15.55 15.55 0 00-21.985 0l-171.138 171.14L59.25 4.565a15.551 15.551 0 00-21.985 0L4.558 37.284c-6.077 6.075-6.077 15.909 0 21.986l171.138 171.128L4.575 401.505c-6.074 6.077-6.074 15.911 0 21.986l32.709 32.719a15.555 15.555 0 0021.986 0l171.117-171.12 171.118 171.12a15.551 15.551 0 0021.985 0l32.709-32.719c6.074-6.075 6.074-15.909 0-21.986L285.08 230.397z");
-            closingX.setAttribute('alt','X');
-            closingX.appendChild(innerPath);
-            closingX.classList.add('closebutton');
-            closingX.addEventListener('click',closebyx = function(){_this.closeModal()});
-            contentWrapper.appendChild(closingX);
+        if (!this.forceOpen) {
+            contentWrapper.appendChild(this.createClosingX());      //Create and add closing X
         }
         contentWrapper.style.cssText += extraCss;
         modal.appendChild(contentWrapper);
         if(content){
             if(typeof(content) === 'string')
                 contentWrapper.appendChild(document.createTextNode(content));
-
             if(typeof(content)==='object')
                 contentWrapper.appendChild(content);
         }
@@ -71,6 +63,7 @@ TinyModal.prototype ={
         this.isOpen = false;
     },
     openModal : function(){
+        if(this.isOpen) return;
         var _this = this;
         _this.toggleTabs();
         _this.toggleScrollLock();
@@ -86,11 +79,10 @@ TinyModal.prototype ={
                     _this.closeModal();
                 }
             });
-        }else {
-            //do nothing
         }
     },
     closeModal : function(){
+        if(!this.isOpen) return;
         this.toggleTabs();
         this.toggleScrollLock();
         this.mainElement.classList.remove('modal-active');
@@ -118,7 +110,6 @@ TinyModal.prototype ={
         document.querySelectorAll('body *:not(.insideModal)').forEach(function(el){
             (el.getAttribute('tabindex_old')=='none') ? el.removeAttribute('tabindex') : el.setAttribute('tabindex',el.getAttribute('tabindex_old'));
             el.removeAttribute('tabindex_old');
-
         });
     },
     toggleTabs:function(){
@@ -139,6 +130,16 @@ TinyModal.prototype ={
             document.querySelector("html").style.position = "fixed";
             document.querySelector("html").style.width = "100%";
         }
+    },
+    createClosingX:function(){
+        var closingX =  document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        closingX.setAttribute('viewBox','0 0 460.775 460.775');
+        var innerPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        innerPath.setAttribute('d',"M285.08 230.397L456.218 59.27c6.076-6.077 6.076-15.911 0-21.986L423.511 4.565a15.55 15.55 0 00-21.985 0l-171.138 171.14L59.25 4.565a15.551 15.551 0 00-21.985 0L4.558 37.284c-6.077 6.075-6.077 15.909 0 21.986l171.138 171.128L4.575 401.505c-6.074 6.077-6.074 15.911 0 21.986l32.709 32.719a15.555 15.555 0 0021.986 0l171.117-171.12 171.118 171.12a15.551 15.551 0 0021.985 0l32.709-32.719c6.074-6.075 6.074-15.909 0-21.986L285.08 230.397z");
+        closingX.setAttribute('alt','X');
+        closingX.appendChild(innerPath);
+        closingX.classList.add('closebutton');
+        closingX.addEventListener('click',closebyx = function(){_this.closeModal()});
+        return closingX;
     }
-
 };

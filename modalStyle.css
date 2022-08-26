@@ -1,8 +1,8 @@
-#modalOverlay{
+.tiny-modal-overlay{
     display:none;
 }
 
-.modal-active#modalOverlay{
+.modal-active.tiny-modal-overlay{
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -13,7 +13,7 @@
     display:block;
 }
 
-.modal-active#modalOverlay .modalContent{
+.modal-active.tiny-modal-overlay .modalContent{
     min-width: 25vw;
     min-height: 10vh;
     position: absolute;
@@ -27,12 +27,12 @@
     max-width: 95vw;
 }
 
-.modal-active#modalOverlay .modalContent>div.insideModal:first-child{
+.modal-active.tiny-modal-overlay .modalContent>div.insideModal:first-child{
     width:100%;
     height: 100%;
 }
 
-.modal-active#modalOverlay .modalContent .closebutton{
+.modal-active.tiny-modal-overlay .modalContent .closebutton{
 	position: absolute;
     /*position: sticky;*/
     float: right;
@@ -47,13 +47,13 @@
     fill: #fff;
 }
 
-.modal-active#modalOverlay .modalContent .closebutton:hover{
+.modal-active.tiny-modal-overlay .modalContent .closebutton:hover{
     background-color: gray;
     fill:black;
 }
 
 @media only screen and (max-width: 600px){
-    .modal-active#modalOverlay .modalContent{
+    .modal-active.tiny-modal-overlay .modalContent{
         min-width: 98vw;
     }
 }
