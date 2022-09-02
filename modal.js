@@ -132,6 +132,7 @@ TinyModal.prototype ={
         }
     },
     createClosingX:function(){
+        var _this = this;
         var closingX =  document.createElementNS("http://www.w3.org/2000/svg", "svg");
         closingX.setAttribute('viewBox','0 0 460.775 460.775');
         var innerPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
